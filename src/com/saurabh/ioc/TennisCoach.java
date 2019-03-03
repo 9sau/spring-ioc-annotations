@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TennisCoach implements Coach {
 
+	//spring uses java reflection to inject dependency for field injections
+	@Autowired
 	private FortuneService service;
 
 	// Spring will scan for all components that implements Fortune Service
@@ -16,18 +18,18 @@ public class TennisCoach implements Coach {
 	 * service; }
 	 */
 
-	
-	public TennisCoach(){
+	public TennisCoach() {
 		System.out.println("Inside Tennis Coach contructor");
 	}
-	
+
 	// Spring will scan for all components that implements Fortune Service
 	// and injects it in this constructor. Here, it is HappyFortuneService
-	@Autowired
-	public void setFortuneService(FortuneService service){
-		System.out.println("Inside setter for Tennis Coach");
-		this.service = service;
-	}
+	// below method name can be anything
+	/*
+	 * @Autowired public void setFortuneService(FortuneService service){
+	 * System.out.println("Inside setter for Tennis Coach"); this.service =
+	 * service; }
+	 */
 
 	@Override
 	public String getDailyWorkout() {
