@@ -1,5 +1,8 @@
 package com.saurabh.ioc;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,14 +11,14 @@ import org.springframework.stereotype.Component;
 
 //Register bean in spring container with default name as "tennisCoach"
 @Component
-@Scope("prototype")
+@Scope("singleton")
 public class TennisCoach implements Coach {
 
-	//spring uses java reflection to inject dependency for field injections
+	// spring uses java reflection to inject dependency for field injections
 	@Autowired
 	@Qualifier("randomFortuneService")
 	private FortuneService service;
-	
+
 	@Value("${coach.name}")
 	private String name;
 
@@ -29,8 +32,8 @@ public class TennisCoach implements Coach {
 	public TennisCoach() {
 		System.out.println("Inside Tennis Coach contructor");
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
 
@@ -51,6 +54,16 @@ public class TennisCoach implements Coach {
 	@Override
 	public String getDailyFortune() {
 		return service.getDailyFortune();
+	}
+
+	@PostConstruct
+	private void init() {
+		System.out.println("Initializing bean");
+	}
+
+	@PreDestroy
+	private void destroy() {
+		System.out.println("Destroying bean");
 	}
 
 }
