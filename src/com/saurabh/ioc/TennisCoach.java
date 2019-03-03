@@ -1,6 +1,7 @@
 package com.saurabh.ioc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 //Register bean in spring container with default name as "tennisCoach"
@@ -10,6 +11,9 @@ public class TennisCoach implements Coach {
 	//spring uses java reflection to inject dependency for field injections
 	@Autowired
 	private FortuneService service;
+	
+	@Value("${coach.name}")
+	private String name;
 
 	// Spring will scan for all components that implements Fortune Service
 	// and injects it in this constructor. Here, it is HappyFortuneService
@@ -20,6 +24,10 @@ public class TennisCoach implements Coach {
 
 	public TennisCoach() {
 		System.out.println("Inside Tennis Coach contructor");
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 	// Spring will scan for all components that implements Fortune Service
