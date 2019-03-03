@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 //Register bean in spring container with default name as "tennisCoach"
 @Component
+@Scope("prototype")
 public class TennisCoach implements Coach {
 
 	//spring uses java reflection to inject dependency for field injections
