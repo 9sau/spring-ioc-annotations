@@ -1,6 +1,7 @@
 package com.saurabh.ioc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ public class TennisCoach implements Coach {
 
 	//spring uses java reflection to inject dependency for field injections
 	@Autowired
+	@Qualifier("randomFortuneService")
 	private FortuneService service;
 	
 	@Value("${coach.name}")
